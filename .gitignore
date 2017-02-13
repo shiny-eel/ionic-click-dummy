@@ -41,7 +41,7 @@ resources/
 *.vsproj
 
 src/**/*.js
-VS-Friday-With-Git.jsproj
+ionic-click-dummy-vs.jsproj
 *.map
 /platforms
 
