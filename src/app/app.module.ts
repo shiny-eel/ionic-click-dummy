@@ -6,7 +6,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DetailsPage } from '../pages/details/details';
-import { ConfirmPayPage } from '../pages/confirm-pay/confirm-pay';
+import { ChangeCardPage } from '../pages/change-card/change-card';
 import { ReceivePayPage } from '../pages/receive-pay/receive-pay';
 
 
@@ -18,7 +18,7 @@ import { ReceivePayPage } from '../pages/receive-pay/receive-pay';
     HomePage,
     TabsPage,
 	DetailsPage,
-	ConfirmPayPage,
+	ChangeCardPage,
   ReceivePayPage
   ],
   imports: [
@@ -32,7 +32,7 @@ import { ReceivePayPage } from '../pages/receive-pay/receive-pay';
     HomePage,
     TabsPage,
 	DetailsPage,
-	ConfirmPayPage,
+	ChangeCardPage,
   ReceivePayPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]

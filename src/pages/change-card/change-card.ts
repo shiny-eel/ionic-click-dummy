@@ -3,16 +3,16 @@ import { NavController, NavParams, ViewController, Platform } from 'ionic-angula
 import { DetailsPage } from '../details/details';
 
 /*
-  Generated class for the ConfirmPay page.
+  Generated class for the ChangeCard page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-confirm-pay',
-  templateUrl: 'confirm-pay.html'
+  selector: 'page-change-card',
+  templateUrl: 'change-card.html'
 })
-export class ConfirmPayPage {
+export class ChangeCardPage {
   parentPage: DetailsPage;
   constructor(
     public platform: Platform,

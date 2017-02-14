@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Modal } from 'ionic-angular';
-import { ConfirmPayPage } from '../confirm-pay/confirm-pay';
+import { ChangeCardPage } from '../change-card/change-card';
 import { ReceivePayPage } from '../receive-pay/receive-pay';
 
 /*
@@ -19,22 +19,22 @@ export class DetailsPage {
 	
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
 	  this.sliderValue = "40";
-	  this.pumpNumber = "1";
+	  this.pumpNumber = "Pump 1";
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailsPage');
   }
 
-  goToPay() {
+  goToChangeCard() {
     console.log('Button Clicked');
-	  let modal = this.modalCtrl.create(ConfirmPayPage, { parentPage: this })
+	  let modal = this.modalCtrl.create(ChangeCardPage, { parentPage: this })
 	  modal.present();
  //   this.navCtrl.pop();
   }
   
   public goToNext() {
-	  console.log('Going home');
+	  console.log('Going next');
 	  this.navCtrl.push(ReceivePayPage);
   }
 

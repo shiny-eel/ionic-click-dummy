@@ -1,0 +1,35 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Change Card
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<p> Currently Using card no: 1234-XXXX-XXXX-XXXX </p>
+<ion-list>
+  <ion-list-header>
+    New Card Details
+  </ion-list-header>
+  <ion-item>
+    <ion-label color="primary">Inline Label</ion-label>
+    <ion-input placeholder="Text Input"></ion-input>
+  </ion-item>
+</ion-list>
+
+	<button ion-button (click)="dismiss()">Confirm Change </button>
+
+  <p>
+	<button ion-button (click)="dismiss()">Yes </button>
+
+	</p>
+
+</ion-content>
