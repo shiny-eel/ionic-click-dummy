@@ -20,15 +20,20 @@
     New Card Details
   </ion-list-header>
   <ion-item>
-    <ion-label color="primary">Inline Label</ion-label>
-    <ion-input placeholder="Text Input"></ion-input>
+    <ion-label color="primary">Card Number</ion-label>
+    <ion-input placeholder="xxx-xxxxx-xxxxx-xx"></ion-input>
   </ion-item>
+  <ion-item>
+    <ion-label color="primary">Security Number</ion-label>
+    <ion-input placeholder="xxx"></ion-input>
+  </ion-item>
+ 
 </ion-list>
 
-	<button ion-button (click)="dismiss()">Confirm Change </button>
+	<button ion-button (click)="presentToast(); dismiss()">Confirm Change </button>
 
   <p>
-	<button ion-button (click)="dismiss()">Yes </button>
+	<button ion-button (click)="dismiss()">Cancel </button>
 
 	</p>
 

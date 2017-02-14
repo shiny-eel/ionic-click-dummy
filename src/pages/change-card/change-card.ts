@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { NavController, NavParams, ViewController, Platform } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavParams, ViewController, Platform, ToastController} from 'ionic-angular';
 import { DetailsPage } from '../details/details';
 
 /*
@@ -17,7 +17,8 @@ export class ChangeCardPage {
   constructor(
     public platform: Platform,
     public params: NavParams,
-    public viewCtrl: ViewController
+    public viewCtrl: ViewController,
+    private toastCtrl: ToastController
   ){
 	  this.parentPage = params.get('parentPage');
 	  console.log('hola', this.parentPage);
@@ -37,4 +38,18 @@ export class ChangeCardPage {
     this.viewCtrl.dismiss();
     this.parentPage.goToNext();
   }
+
+  presentToast() {
+  let toast = this.toastCtrl.create({
+    message: 'Card was changed successfully',
+    duration: 3000,
+    position: 'top'
+  });
+
+  toast.onDidDismiss(() => {
+    console.log('Dismissed toast');
+  });
+
+  toast.present();
+}
 }

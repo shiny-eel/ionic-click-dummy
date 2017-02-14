@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, Modal } from 'ionic-angular';
+import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { ChangeCardPage } from '../change-card/change-card';
 import { ReceivePayPage } from '../receive-pay/receive-pay';
 
@@ -17,7 +17,10 @@ export class DetailsPage {
 	sliderValue: string;
 	pumpNumber: string;
 	
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, 
+  public navParams: NavParams, 
+  public modalCtrl: ModalController,
+  public loadingCtrl: LoadingController) {
 	  this.sliderValue = "40";
 	  this.pumpNumber = "Pump 1";
   }
@@ -38,6 +41,22 @@ export class DetailsPage {
 	  this.navCtrl.push(ReceivePayPage);
   }
 
+presentLoadingText() {
+  let loading = this.loadingCtrl.create({
+    content: 'Waiting for POS Confirmation...',
+    dismissOnPageChange: true
+  });
+
+  loading.present();
+
+  setTimeout(() => {
+    this.goToNext();
+  }, 3000);
+
+  setTimeout(() => {
+    loading.dismiss();
+  }, 3000);
+}
 
 
 }
