@@ -24,18 +24,18 @@ export class DetailsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetailsPage');
   }
+
   goToPay() {
-	      console.log('Button Clicked');
-
-	  let modal = this.modalCtrl.create(ConfirmPayPage, { parentPage: DetailsPage })
+    console.log('Button Clicked');
+	  let modal = this.modalCtrl.create(ConfirmPayPage, { parentPage: this })
 	  modal.present();
-	  	  this.navCtrl.pop();
-
+ //   this.navCtrl.pop();
   }
   
   public goToHome() {
 	  console.log('Going home');
 	  this.navCtrl.pop();
   }
+
 
 }

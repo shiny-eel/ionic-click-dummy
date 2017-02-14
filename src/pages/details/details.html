@@ -14,8 +14,10 @@
 
 
 <ion-content padding>
-<p> Paying at station: Henderson Lane </p>
-     <ion-label>Select Amount</ion-label>
+	<p> Paying at station: Henderson Lane </p>
+
+	<ion-toggle>Fill Tank</ion-toggle>
+	<ion-label>Select Amount</ion-label>
 
 	<h1 style="text-align: center;">
 	${{ sliderValue }}
@@ -29,14 +31,16 @@
      <ion-label>Select Pump Number</ion-label>
 
 	 <ion-item>
-	<ion-select [(ngModel)]="pumpNumber"
-	>
-	<ion-option>Pump 1</ion-option>
-	<ion-option>Pump 2</ion-option>
-	<ion-option>Pump 3</ion-option>
+	<ion-select [(ngModel)]="pumpNumber">
+		<ion-option>Pump 1</ion-option>
+		<ion-option>Pump 2</ion-option>
+		<ion-option>Pump 3</ion-option>
 	</ion-select>
 	</ion-item>
 	<p>
 	<button ion-button (click)="goToPay()">Confirm </button>
+	</p>	
+	<p>
+	<button ion-button (click)="goToHome()">Pop </button>
 	</p>
 </ion-content>

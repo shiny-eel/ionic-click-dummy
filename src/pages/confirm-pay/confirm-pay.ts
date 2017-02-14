@@ -13,7 +13,7 @@ import { DetailsPage } from '../details/details';
   templateUrl: 'confirm-pay.html'
 })
 export class ConfirmPayPage {
-  @Input()	parentPage: DetailsPage;
+  parentPage: DetailsPage;
   constructor(
     public platform: Platform,
     public params: NavParams,
@@ -28,7 +28,8 @@ export class ConfirmPayPage {
   }
     dismiss() {
     this.viewCtrl.dismiss();
-	//DetailsPage.goToHome();
+    console.log('this is it ', this.parentPage.sliderValue)
+    this.parentPage.goToHome();
   }
 
 }
