@@ -27,8 +27,15 @@ export class DetailsPage {
   goToPay() {
 	      console.log('Button Clicked');
 
-	  let modal = this.modalCtrl.create(ConfirmPayPage)
+	  let modal = this.modalCtrl.create(ConfirmPayPage, { parentPage: DetailsPage })
 	  modal.present();
+	  	  this.navCtrl.pop();
+
+  }
+  
+  public goToHome() {
+	  console.log('Going home');
+	  this.navCtrl.pop();
   }
 
 }
