@@ -6,6 +6,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { DetailsPage } from '../pages/details/details';
+import { ConfirmPayPage } from '../pages/confirm-pay/confirm-pay';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DetailsPage } from '../pages/details/details';
     ContactPage,
     HomePage,
     TabsPage,
-	DetailsPage
+	DetailsPage,
+	ConfirmPayPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -27,7 +29,8 @@ import { DetailsPage } from '../pages/details/details';
     ContactPage,
     HomePage,
     TabsPage,
-	DetailsPage
+	DetailsPage,
+	ConfirmPayPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

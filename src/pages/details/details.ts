@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController, Modal } from 'ionic-angular';
+import { ConfirmPayPage } from '../confirm-pay/confirm-pay';
 
 /*
   Generated class for the Details page.
@@ -15,7 +16,7 @@ export class DetailsPage {
 	sliderValue: string;
 	pumpNumber: string;
 	
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
 	  this.sliderValue = "40";
 	  this.pumpNumber = "1";
   }
@@ -26,7 +27,8 @@ export class DetailsPage {
   goToPay() {
 	      console.log('Button Clicked');
 
-	  this.navCtrl.push(DetailsPage);
+	  let modal = this.modalCtrl.create(ConfirmPayPage)
+	  modal.present();
   }
 
 }
