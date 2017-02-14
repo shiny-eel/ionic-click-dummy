@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Modal } from 'ionic-angular';
 import { ConfirmPayPage } from '../confirm-pay/confirm-pay';
+import { ReceivePayPage } from '../receive-pay/receive-pay';
 
 /*
   Generated class for the Details page.
@@ -32,10 +33,11 @@ export class DetailsPage {
  //   this.navCtrl.pop();
   }
   
-  public goToHome() {
+  public goToNext() {
 	  console.log('Going home');
-	  this.navCtrl.pop();
+	  this.navCtrl.push(ReceivePayPage);
   }
+
 
 
 }

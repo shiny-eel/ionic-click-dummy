@@ -26,10 +26,15 @@ export class ConfirmPayPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConfirmPayPage');
   }
-    dismiss() {
+
+  // This is called when the auto-created 'x' in the corner is clicked
+  dismiss() {
     this.viewCtrl.dismiss();
     console.log('this is it ', this.parentPage.sliderValue)
-    this.parentPage.goToHome();
   }
 
+  continue() {
+    this.viewCtrl.dismiss();
+    this.parentPage.goToNext();
+  }
 }
