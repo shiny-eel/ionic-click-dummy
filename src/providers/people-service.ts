@@ -15,7 +15,8 @@ export class PeopleService {
   constructor(public http: Http) {
     console.log('Hello PeopleService Provider');
   }
-   load() {
+  
+  load() {
     if (this.data1) {
       return Promise.resolve(this.data1);
     }
