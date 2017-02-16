@@ -19,4 +19,8 @@ export class ReceivePayPage {
     console.log('ionViewDidLoad ReceivePayPage');
   }
 
+  goBackHome() {
+    this.navCtrl.popToRoot();
+  }
+
 }
