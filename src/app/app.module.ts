@@ -13,7 +13,22 @@ import { Storage } from '@ionic/storage';
 import { LoginPage } from '../pages/login/login';
 import { AccountPage } from '../pages/account/account';
 import { SignupPage } from '../pages/signup/signup';
+import { FormBuilder, Validators, AbstractControl} from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
+
+// Import the AF2 Module
+import { AngularFireModule } from 'angularfire2';
+ 
+// AF2 Settings
+export const firebaseConfig = {
+    apiKey: "AIzaSyB3MC4SI6-zB89wy3kyzJxQN5qCHP6onCk",
+    authDomain: "ionic-alpha.firebaseapp.com",
+    databaseURL: "https://ionic-alpha.firebaseio.com",
+    storageBucket: "ionic-alpha.appspot.com",
+    messagingSenderId: "1074544308976"
+};
 
 @NgModule({
   declarations: [
@@ -30,7 +45,8 @@ import { SignupPage } from '../pages/signup/signup';
   SignupPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
