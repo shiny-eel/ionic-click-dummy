@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Platform, AlertController } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import {Push} from 'ionic-native';
+import { UserData } from '../providers/user-data';
+
 import { TabsPage } from '../pages/tabs/tabs';
 
 
@@ -77,6 +79,7 @@ export class MyApp {
     });
     push.on('error', (e) => {
       console.log(e.message);
+
     });
   }
 

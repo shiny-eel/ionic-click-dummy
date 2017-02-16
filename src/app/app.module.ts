@@ -8,6 +8,11 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { DetailsPage } from '../pages/details/details';
 import { ChangeCardPage } from '../pages/change-card/change-card';
 import { ReceivePayPage } from '../pages/receive-pay/receive-pay';
+import { UserData } from '../providers/user-data';
+import { Storage } from '@ionic/storage';
+import { LoginPage } from '../pages/login/login';
+import { AccountPage } from '../pages/account/account';
+import { SignupPage } from '../pages/signup/signup';
 
 
 @NgModule({
@@ -19,7 +24,10 @@ import { ReceivePayPage } from '../pages/receive-pay/receive-pay';
     TabsPage,
 	DetailsPage,
 	ChangeCardPage,
-  ReceivePayPage
+  ReceivePayPage,
+  LoginPage,
+  AccountPage,
+  SignupPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -33,8 +41,11 @@ import { ReceivePayPage } from '../pages/receive-pay/receive-pay';
     TabsPage,
 	DetailsPage,
 	ChangeCardPage,
-  ReceivePayPage
+  ReceivePayPage,
+  LoginPage,
+  AccountPage,
+  SignupPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, UserData, Storage]
 })
 export class AppModule {}

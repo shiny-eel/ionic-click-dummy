@@ -16,44 +16,48 @@
 
 	<ion-list>
 
-		<ion-item-divider>
+		<ion-list-header>
 			Payment Details
-		</ion-item-divider>
+		</ion-list-header>
 
 		<ion-item>
-			<ion-label> Station </ion-label>
-			<div item-content outline> Henderson Lane </div>
+			<ion-icon item-left name="pin"></ion-icon>
+			<h2> Station </h2>
+			<p> 99 Pennsylvania Ave </p>
 		</ion-item>
 		<ion-item>
+			<ion-icon item-left name="calculator"></ion-icon>
+			<ion-label color="dark">Pump Number</ion-label>
+			<ion-select [(ngModel)]="pumpNumber">
+				<ion-option>Pump 1</ion-option>
+				<ion-option>Pump 2</ion-option>
+				<ion-option>Pump 3</ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item>
+			<ion-icon item-left name="cash"></ion-icon>
+
 			<ion-label>
 				Tank Fill Amount
 			</ion-label>
 			<h1 item-content>
 				${{ sliderValue }}
 			</h1>
+		</ion-item>
+		<ion-item>
 			<ion-range min="10" max="Fill" step="10" snaps="true" color="secondary" [(ngModel)]="sliderValue">
 				<ion-label range-left>$10</ion-label>
 				<ion-label range-right>$100</ion-label>
 			</ion-range>
 		</ion-item>
 
-		<ion-item>
-			<ion-label>
-				Pump Number
-			</ion-label>
-			<ion-select item-content [(ngModel)]="pumpNumber">
-				<ion-option>Pump 1</ion-option>
-				<ion-option>Pump 2</ion-option>
-				<ion-option>Pump 3</ion-option>
-			</ion-select>
-		</ion-item>
 	</ion-list>
 
 	<ion-list>
-		<ion-item-divider>
+		<ion-list-header>
 			Confirm Payment
-		</ion-item-divider>
-		<h2>Are you sure you want to pay ${{ sliderValue }} at {{ pumpNumber }}?</h2>
+		</ion-list-header>
+			<h2>Are you sure you want to pay ${{ sliderValue }} at {{ pumpNumber }}?</h2>
 		<p> Using card no: 1234-XXXX-XXXX-XXXX </p>
 		<button ion-button item-left (click)="goToChangeCard()">Change Card </button>
 		<button ion-button item-right (click)="presentLoadingText()">Confirm </button>
