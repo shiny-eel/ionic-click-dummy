@@ -11,10 +11,13 @@ import { UserData } from '../../providers/user-data';
   templateUrl: 'account.html'
 })
 export class AccountPage {
-  username: string = "Default Username";
+  username: string;
 
   constructor(public alertCtrl: AlertController, public nav: NavController, public userData: UserData) {
-
+      this.username='default';
+      if (userData.hasLoggedIn()) {
+        console.log('Already Logged In');
+      }
   }
 
   ngAfterViewInit() {
@@ -62,8 +65,8 @@ export class AccountPage {
   }
 
   logout() {
-    // this.userData.logout();
-    // this.nav.setRoot(LoginPage);
+     this.userData.logout();
+     this.nav.setRoot(this);
   }
 
 

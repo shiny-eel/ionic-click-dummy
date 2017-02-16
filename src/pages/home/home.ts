@@ -13,6 +13,9 @@ export class HomePage {
   constructor(public navCtrl: NavController,
   public peopleService: PeopleService) {
       this.loadPeople();
+      this.navCtrl.viewDidEnter.subscribe((view) => {
+    console.log("Hello yes look at the new page", view.instance.constructor.name);
+});
   }
   
   goToProcess() {

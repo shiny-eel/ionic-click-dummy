@@ -16,7 +16,11 @@ export class UserData {
   constructor(
     public events: Events,
     public storage: Storage
-  ) {}
+  ) {
+      // timeout(function(){         // added dummy timeout to simulate delay
+      //               this.storage.remove(this.HAS_LOGGED_IN);   
+      //           }, 3000);         
+  }
 
 //   hasFavorite(sessionName: string) {
 //     return (this._favorites.indexOf(sessionName) > -1);
@@ -57,6 +61,9 @@ export class UserData {
 
   getUsername() {
     return this.storage.get('username').then((value) => {
+      if (value == null) {
+        return 'default'
+      }
       return value;
     });
   };

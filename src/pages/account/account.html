@@ -9,17 +9,23 @@
 
 <ion-content class="outer-content">
   <!--<div padding-top text-center *ngIf="username">-->
-      <div padding-top text-center>
+  <div padding-top text-center>
 
     <img src="http://www.gravatar.com/avatar?d=mm&s=140" alt="avatar">
     <h2>Hello, {{username}}</h2>
 
-    <ion-list inset>
+    <ion-list inset ng-if="!userData.hasLoggedIn()">
+      
       <button ion-item (click)="updatePicture()">Update Picture</button>
       <button ion-item (click)="changeUsername()">Change Username</button>
       <button ion-item (click)="changePassword()">Change Password</button>
-      <!--<button ion-item (click)="support()">Support</button>-->
+      <button ion-item (click)="support()">Support</button>
       <button ion-item (click)="logout()">Logout</button>
     </ion-list>
+    <!--
+    <ion-list inset *ngIf="!this.userData.hasLoggedIn()">
+      <p> create an account you nob </p>
+    </ion-list>-->
+
   </div>
 </ion-content>
