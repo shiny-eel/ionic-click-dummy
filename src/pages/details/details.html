@@ -26,6 +26,16 @@
 		</ion-item>
 		<ion-item>
 			<ion-label>
+				Pump Number
+			</ion-label>
+			<ion-select item-content [(ngModel)]="pumpNumber">
+				<ion-option>Pump 1</ion-option>
+				<ion-option>Pump 2</ion-option>
+				<ion-option>Pump 3</ion-option>
+			</ion-select>
+		</ion-item>
+		<ion-item>
+			<ion-label>
 				Tank Fill Amount
 			</ion-label>
 			<h1 item-content>
@@ -37,16 +47,6 @@
 			</ion-range>
 		</ion-item>
 
-		<ion-item>
-			<ion-label>
-				Pump Number
-			</ion-label>
-			<ion-select item-content [(ngModel)]="pumpNumber">
-				<ion-option>Pump 1</ion-option>
-				<ion-option>Pump 2</ion-option>
-				<ion-option>Pump 3</ion-option>
-			</ion-select>
-		</ion-item>
 	</ion-list>
 
 	<ion-list>
