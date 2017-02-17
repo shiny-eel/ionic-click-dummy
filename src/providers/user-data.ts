@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { Auth, User, AuthLoginOptions } from '@ionic/cloud-angular';
+
 /**
  * Code from https://github.com/driftyco/ionic-conference-app
  * Thanks guys :)
@@ -9,75 +11,74 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class UserData {
-//   _favorites: string[] = [];
-  HAS_LOGGED_IN = 'hasLoggedIn';
-  HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
+	//   _favorites: string[] = [];
+	HAS_LOGGED_IN = 'hasLoggedIn';
+	HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
 
-  constructor(
-    public events: Events,
-    public storage: Storage
-  ) {
-      // timeout(function(){         // added dummy timeout to simulate delay
-      //               this.storage.remove(this.HAS_LOGGED_IN);   
-      //           }, 3000);         
-  }
+	constructor(
+		public events: Events,
+		public storage: Storage,
+		public auth: Auth, public user: User
+	) {
 
-//   hasFavorite(sessionName: string) {
-//     return (this._favorites.indexOf(sessionName) > -1);
-//   };
+	}
 
-//   addFavorite(sessionName: string) {
-//     this._favorites.push(sessionName);
-//   };
+	login(username: string, password: string) {
 
-//   removeFavorite(sessionName: string) {
-//     let index = this._favorites.indexOf(sessionName);
-//     if (index > -1) {
-//       this._favorites.splice(index, 1);
-//     }
-//   };
+		// ******* Add Ionic Custom Auth 
+		let loginData = { 'id': username, 'passphrase': password };
+		let loginOptions: AuthLoginOptions = { 'inAppBrowserOptions': { 'hidden': true } };
 
-  login(username: string) {
-    this.storage.set(this.HAS_LOGGED_IN, true);
-    this.setUsername(username);
-    this.events.publish('user:login');
-  };
+		this.auth.login('custom', loginData, loginOptions).then( 
+			//  Fulfilled
+		);
+		// ********
+		this.storage.set(this.HAS_LOGGED_IN, true);
+		this.setUsername(username);
+		this.events.publish('user:login');
+	};
 
-  signup(username: string) {
-    this.storage.set(this.HAS_LOGGED_IN, true);
-    this.setUsername(username);
-    this.events.publish('user:signup');
-  };
+	signup(username: string, password: string) {
 
-  logout() {
-    this.storage.remove(this.HAS_LOGGED_IN);
-    this.storage.remove('username');
-    this.events.publish('user:logout');
-  };
+		// Yet to implement signup? TODO
 
-  setUsername(username: string) {
-    this.storage.set('username', username);
-  };
+		this.storage.set(this.HAS_LOGGED_IN, true);
+		this.setUsername(username);
+		this.events.publish('user:signup');
+	};
 
-  getUsername() {
-    return this.storage.get('username').then((value) => {
-      if (value == null) {
-        return 'default'
-      }
-      return value;
-    });
-  };
+	logout() {
+		// Ionic Custom Auth
+		this.auth.logout();
 
-  // return a promise
-  hasLoggedIn() {
-    return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
-      return value === true;
-    });
-  };
+		this.storage.remove(this.HAS_LOGGED_IN);
+		this.storage.remove('username');
+		this.events.publish('user:logout');
+	};
 
-  checkHasSeenTutorial() {
-    return this.storage.get(this.HAS_SEEN_TUTORIAL).then((value) => {
-      return value;
-    })
-  };
+	setUsername(username: string) {
+		this.storage.set('username', username);
+	};
+
+	getUsername() {
+		return this.storage.get('username').then((value) => {
+			if (value == null) {
+				return 'default'
+			}
+			return value;
+		});
+	};
+
+	// return a promise
+	hasLoggedIn() {
+		return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
+			return value === true;
+		});
+	};
+
+	checkHasSeenTutorial() {
+		return this.storage.get(this.HAS_SEEN_TUTORIAL).then((value) => {
+			return value;
+		})
+	};
 }
