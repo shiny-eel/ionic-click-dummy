@@ -6,6 +6,7 @@ import { NavController } from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
 import { UserData } from '../../providers/user-data';
+import { AccountPage } from '../account/account';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class LoginPage {
 
     if (form.valid) {
       this.userData.login(this.login.username);
-
+      this.navCtrl.push(AccountPage);
     }
   }
 

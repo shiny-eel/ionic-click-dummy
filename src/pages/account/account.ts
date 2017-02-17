@@ -66,6 +66,7 @@ export class AccountPage {
 
   logout() {
      this.userData.logout();
+     this.nav.push(LoginPage);
 //     this.nav.setRoot(LoginPage);
   }
 
