@@ -9,6 +9,13 @@ import { Auth, User, AuthLoginOptions } from '@ionic/cloud-angular';
  * Thanks guys :)
  */
 
+/**
+ * Responsibility for implementation of login and signup is within this provider.
+ * 
+ * No individual pages should implement this. However, individual pages will need to
+ * implement the front-end for login/signup - i.e. reporting to the user if a logon attempt was invalid.
+ */
+
 @Injectable()
 export class UserData {
 	//   _favorites: string[] = [];

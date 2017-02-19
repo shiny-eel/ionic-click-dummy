@@ -27,6 +27,8 @@ export class TabsPage {
               public navCtrl: NavController,
               public userData: UserData) {
 
+
+      // Tabs must subscribe with the UserData provider to know if login has occurred.
       if (userData.hasLoggedIn()) {
         this.tab4Root = AccountPage;
       }
@@ -42,21 +44,9 @@ export class TabsPage {
 
   giveAccountAccess() {
     this.tab4Root = AccountPage;
-    // var pageStack = [TabsPage];
-    // this.navCtrl.setPages(pageStack);
-    // this.tabRef.select(3);
-  ////  this.navCtrl.push(AccountPage);
-//this.navCtrl.remove(0);
-
   }
 
   removeAccountAccess() {
     this.tab4Root = LoginPage;
-    // var pageStack = [TabsPage];
-    // this.navCtrl.setPages(pageStack);
-    // this.tabRef.select(3);
-    
-   // this.navCtrl.re
-   // this.navCtrl.remove(0);
   }
 }
