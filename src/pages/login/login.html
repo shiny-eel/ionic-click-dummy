@@ -15,6 +15,7 @@
 	<form #loginForm="ngForm" novalidate>
 		<ion-list no-lines>
 			<ion-item>
+				<!-- Prompt user input USERNAME -->
 				<ion-label stacked color="primary">Username</ion-label>
 				<ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
 					required>
@@ -25,6 +26,7 @@
 			</p>
 
 			<ion-item>
+				<!-- Prompt user input PASSWORD -->
 				<ion-label stacked color="primary">Password</ion-label>
 				<ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
 				</ion-input>
