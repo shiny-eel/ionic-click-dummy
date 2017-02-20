@@ -25,7 +25,7 @@ export class StorageAccess {
 		this.secureStore.create(this.STORE_NAME)
 			.then(() => console.log('Storage is ready!'),
 			error => {
-				console.log('Secure Storage Error', error)
+				console.log('Secure Storage Error:\n', error)
 				this.secureStore = null;
 			}
 			);
@@ -34,18 +34,22 @@ export class StorageAccess {
 
 
 	get(item: string) {
-		let guff = 'Nothing Here'
 		if (this.secureStore) {
 			this.secureStore.get(item)
 				.then(
 				data => {
-					console.log(data);
-					guff = data;
+					console.log('Found this in store: ', data);
+					return data;
 				},
-				error => console.log(error)
+				error => {
+					// Do not return anything
+					console.log('Error in finding item.\n', error)
+				}
 				);
-		} else { console.log('Stub since fake store'); }
-		return guff;
+		} else {
+			console.log('Stub since fake store');
+			return 'Stub since fake store';
+		}
 	}
 
 	set(item: string, value: any) {
