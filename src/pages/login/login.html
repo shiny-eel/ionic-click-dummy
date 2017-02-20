@@ -11,6 +11,9 @@
 	<div class="logo">
 		<img src="assets/icon/favicon.ico" alt="Ionic logo">
 	</div>
+	<p ion-text [hidden]="!invalidLogin" color="danger" padding-left>
+				Invalid email/password.
+	</p>
 
 	<form #loginForm="ngForm" novalidate>
 		<ion-list no-lines>

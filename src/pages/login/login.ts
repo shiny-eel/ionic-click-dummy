@@ -17,6 +17,7 @@ import { AccountPage } from '../account/account';
 export class LoginPage {
 	login: { username?: string, password?: string } = {};
 	submitted = false;
+	invalidLogin = false;
 
 	constructor(public navCtrl: NavController, public userData: UserData,
 		public viewCtrl: ViewController,
@@ -24,6 +25,7 @@ export class LoginPage {
 		this.events.subscribe('user:invalid', (event) => {
 			console.log('InvalidLogin, keep logon page open');
 			//this.goToLogin();
+			this.invalidLogin = true;
 		})
 	}
 
