@@ -20,44 +20,55 @@ export class StorageAccess {
 	STORE_NAME = 'my_store'
 
 	constructor(public http: Http) {
+		console.log('Initialising Secure Storage')
+		this.secureStore = new SecureStorage();
+		this.secureStore.create(this.STORE_NAME)
+			.then(() => console.log('Storage is ready!'),
+			error => {
+				console.log('Secure Storage Error', error)
+				this.secureStore = null;
+			}
+			);
 		console.log('Hello StorageAccess Provider');
 	}
 
-	initSecureStorage(){
-		this.secureStore = new SecureStorage();
-		this.secureStore.create(this.STORE_NAME)
-			.then(  () => console.log('Storage is ready!'),
-			error => console.log(error)
-		);
-	}
 
 	get(item: string) {
 		let guff = 'Nothing Here'
-		this.secureStore.get(item)
- 			.then(
+		if (this.secureStore) {
+			this.secureStore.get(item)
+				.then(
 				data => {
 					console.log(data);
 					guff = data;
 				},
 				error => console.log(error)
-			);
+				);
+		} else { console.log('Stub since fake store'); }
 		return guff;
 	}
 
 	set(item: string, value: any) {
-		this.secureStore.set(item, value)
-			.then(
+		if (this.secureStore) {
+
+			this.secureStore.set(item, value)
+				.then(
 				data => console.log(data),
 				error => console.log(error)
-			);
+				);
+		} else { console.log('Stub since fake store'); }
 	}
 
-	remove(item: string) {	
-		this.secureStore.remove('myitem')
-			.then(
+	remove(item: string) {
+		if (this.secureStore) {
+
+			this.secureStore.remove('myitem')
+				.then(
 				data => console.log(data),
 				error => console.log(error)
-			);
+				);
+		} else { console.log('Stub since fake store'); }
+
 	}
 
 }
