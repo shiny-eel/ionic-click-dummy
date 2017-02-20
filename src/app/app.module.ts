@@ -10,6 +10,7 @@ import { DetailsPage } from '../pages/details/details';
 import { ChangeCardPage } from '../pages/change-card/change-card';
 import { ReceivePayPage } from '../pages/receive-pay/receive-pay';
 import { UserData } from '../providers/user-data';
+import { StorageAccess } from '../providers/storage-access';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../pages/login/login';
 import { AccountPage } from '../pages/account/account';
@@ -73,6 +74,6 @@ const cloudSettings: CloudSettings = {
 		SignupPage,
 		AuthorisationPage
 	],
-	providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, UserData, Storage]
+	providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, UserData, Storage, StorageAccess]
 })
 export class AppModule { }
