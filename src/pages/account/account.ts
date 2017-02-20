@@ -1,74 +1,109 @@
 import { Component } from '@angular/core';
 
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, NavController, ModalController, Modal } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
 import { UserData } from '../../providers/user-data';
 
 
 @Component({
-  selector: 'page-account',
-  templateUrl: 'account.html'
+	selector: 'page-account',
+	templateUrl: 'account.html'
 })
 export class AccountPage {
-  username: string;
+	username: string;
+	logonModal: Modal;
 
-  constructor(public alertCtrl: AlertController, public nav: NavController, public userData: UserData) {
-      this.username='default';
-      if (userData.hasLoggedIn()) {
-        console.log('Already Logged In');
-      }
-  }
+	constructor(public alertCtrl: AlertController, public nav: NavController,
+		public userData: UserData, public modalCtrl: ModalController,
+		public events: Events) {
+		this.username = 'default';
+		//this.logonModal = this.modalCtrl.create(LoginPage, { parentPage: this }, { enableBackdropDismiss: false });
+		if (userData.hasLoggedIn()) {
+			console.log('Account Page constructed - user already logged in.');
+		} else {
+			this.goToLogin();
+		}
+		// userData.hasLoggedIn().then(any => console.log('User has logged in already!'))
+		// .catch(any => console.log('User has not logged in yet'));
+		//  Tabs must subscribe with the UserData provider to know if login has occurred.
 
-  ngAfterViewInit() {
-    this.getUsername();
-  }
+		this.events.subscribe('user:login', (event) => {
+			console.log('Removing login screen');
+		//	this.nav.pop();
+			this.logonModal.dismiss();
+		});
 
-  updatePicture() {
-    console.log('Clicked to update picture');
-  }
+		this.events.subscribe('user:logout', (event) => {
+			console.log('Logged Off');
+			this.goToLogin();
+		})
+		// this.events.subscribe('user:invalid', (event) => {
+		// 	console.log('InvalidLogin, keep logon page open');
+		// 	//this.goToLogin();
+		// })
+	}
 
-  // Present an alert with the current username populated
-  // clicking OK will update the username and display it
-  // clicking Cancel will close the alert and do nothing
-  changeUsername() {
-    let alert = this.alertCtrl.create({
-      title: 'Change Username',
-      buttons: [
-        'Cancel'
-      ]
-    });
-    alert.addInput({
-      name: 'username',
-      value: this.username,
-      placeholder: 'username'
-    });
-    alert.addButton({
-      text: 'Ok',
-      handler: (data: any) => {
-        this.userData.setUsername(data.username);
-        this.getUsername();
-      }
-    });
+	ngAfterViewInit() {
+		this.getUsername();
+	}
 
-    alert.present();
-  }
+	goToLogin() {
+		console.log('Need to log in');
+		// if (!this.logonModal) {
+		// console.log('Modal being created');
+		this.logonModal = this.modalCtrl.create(LoginPage, { parentPage: this }, { enableBackdropDismiss: false })
+		// }
+		this.logonModal.present();
+		console.log('Modal created');
+	}
 
-  getUsername() {
-    this.userData.getUsername().then((username) => {
-      this.username = username;
-    });
-  }
+	updatePicture() {
+		console.log('Clicked to update picture');
+	}
 
-  changePassword() {
-    console.log('Clicked to change password');
-  }
+	// Present an alert with the current username populated
+	// clicking OK will update the username and display it
+	// clicking Cancel will close the alert and do nothing
+	changeUsername() {
+		let alert = this.alertCtrl.create({
+			title: 'Change Username',
+			buttons: [
+				'Cancel'
+			]
+		});
+		alert.addInput({
+			name: 'username',
+			value: this.username,
+			placeholder: 'username'
+		});
+		alert.addButton({
+			text: 'Ok',
+			handler: (data: any) => {
+				this.userData.setUsername(data.username);
+				this.getUsername();
+			}
+		});
 
-  logout() {
-     this.userData.logout();
-     this.nav.push(LoginPage);
-//     this.nav.setRoot(LoginPage);
-  }
+		alert.present();
+	}
+
+	getUsername() {
+		this.userData.getUsername().then((username) => {
+			this.username = username;
+		});
+	}
+
+	changePassword() {
+		console.log('Clicked to change password');
+	}
+
+	requestLogout() {
+		this.userData.logout();
+		// this.nav.push(LoginPage);
+		//     this.nav.setRoot(LoginPage);
+	}
 
 
 }

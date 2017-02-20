@@ -21,7 +21,7 @@ export class TabsPage {
   tab1Root: any = HomePage;
   tab2Root: any = AboutPage;
   tab3Root: any = ContactPage;
-  tab4Root: any = LoginPage;
+  tab4Root: any = AccountPage;
 
   constructor( public events: Events,
               public navCtrl: NavController,
@@ -29,24 +29,24 @@ export class TabsPage {
 
 
       // Tabs must subscribe with the UserData provider to know if login has occurred.
-      if (userData.hasLoggedIn()) {
-        this.tab4Root = AccountPage;
-      }
-      this.events.subscribe('user:login', (event) => {
-        console.log('Logged On');
-        this.giveAccountAccess();
-      });
-       this.events.subscribe('user:logout', (event) => {
-        console.log('Logged Off');
-        this.removeAccountAccess();
-      })
+      // if (userData.hasLoggedIn()) {
+      //   this.tab4Root = AccountPage;
+      // }
+      // this.events.subscribe('user:login', (event) => {
+      //   console.log('Logged On');
+      //   this.giveAccountAccess();
+      // });
+      //  this.events.subscribe('user:logout', (event) => {
+      //   console.log('Logged Off');
+      //   this.removeAccountAccess();
+      // })
   }
 
-  giveAccountAccess() {
-    this.tab4Root = AccountPage;
-  }
+  // giveAccountAccess() {
+  //   this.tab4Root = AccountPage;
+  // }
 
-  removeAccountAccess() {
-    this.tab4Root = LoginPage;
-  }
+  // removeAccountAccess() {
+  //   this.tab4Root = LoginPage;
+  // }
 }
