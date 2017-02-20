@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Auth, User, AuthLoginOptions, UserDetails } from '@ionic/cloud-angular';
+import { SecureStorage } from 'ionic-native';
 
 /**
  * Code from https://github.com/driftyco/ionic-conference-app
@@ -18,8 +19,9 @@ import { Auth, User, AuthLoginOptions, UserDetails } from '@ionic/cloud-angular'
 
 @Injectable()
 export class UserData {
-	//   _favorites: string[] = [];
 	HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
+	LOGIN_OPTIONS: AuthLoginOptions =
+	{ 'inAppBrowserOptions': { 'hidden': true }, 'remember': false };
 
 	constructor(
 		public events: Events,
@@ -29,17 +31,16 @@ export class UserData {
 		auth.logout;
 	}
 
+
 	login(username: string, password: string) {
 
-		// ******* Add Ionic Custom Auth 
+		// ******* Add Ionic  Auth 
 		let loginData = { 'id': username, 'passphrase': password };
 		let details: UserDetails = { 'email': username, 'password': password };
 		var self = this;
-		let loginOptions: AuthLoginOptions = { 'inAppBrowserOptions': { 'hidden': true } };
 
 		// this.auth.login('custom', loginData, loginOptions).then(function (result) {
-			this.auth.login('basic', details, loginOptions).then(function (result) {
-			//  Fulfilled
+		this.auth.login('basic', details, this.LOGIN_OPTIONS).then(function (result) {
 			// Handle Success
 			console.log('Successful Log In');
 			self.setUsername(username);
@@ -50,11 +51,9 @@ export class UserData {
 			console.log('Failed to log in \n', err)
 			self.events.publish('user:invalid');
 		});
-
-		// promise.then(function())
-		setTimeout(() => {
-			//
-		}, 2000);
+		// setTimeout(() => {
+		// 	//
+		// }, 2000);
 		// ********
 	};
 
@@ -63,7 +62,9 @@ export class UserData {
 		// Yet to implement signup? TODO
 		let details: UserDetails = { 'email': username, 'password': password };
 
-		this.auth.signup(details);
+		this.auth.signup(details).then(() => {
+			return this.auth.login('basic', details, this.LOGIN_OPTIONS);
+		});
 		this.setUsername(username);
 		this.events.publish('user:signup');
 	};
