@@ -9,7 +9,7 @@ import { Platform } from 'ionic-angular';
 @Component({
 	selector: 'page-home',
 	templateUrl: 'home.html',
-	providers: [PeopleService, StorageAccess]
+	providers: [PeopleService]
 })
 export class HomePage {
 	public people: any;
