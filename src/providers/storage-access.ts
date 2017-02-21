@@ -23,6 +23,7 @@ export class StorageAccess {
 	private secureStore: SecureStorage;
 	STORE_NAME = 'my_store'
 	isReady = false;
+	LOGIN_KEY = 'eels in my hovercraft'
 
 	constructor(public http: Http,
 		public plt: Platform) {

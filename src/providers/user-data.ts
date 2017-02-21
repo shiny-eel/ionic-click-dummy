@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Auth, User, AuthLoginOptions, UserDetails } from '@ionic/cloud-angular';
-import { SecureStorage } from 'ionic-native';
 import { StorageAccess } from './storage-access';
 
 /**
@@ -34,11 +33,11 @@ export class UserData {
 		console.log('Hello UserData');
 	}
 
-
+	// When using own login backend, change this to LoginDetails
 	login(username: string, password: string) {
 
 		// ******* Add Ionic  Auth 
-		let loginData = { 'username': username, 'password': password };
+		let loginData = new LoginDetails(username, password);
 		let details: UserDetails = { 'email': username, 'password': password };
 		var self = this;
 
@@ -54,15 +53,16 @@ export class UserData {
 			console.log('Failed to log in \n', err)
 			self.events.publish('user:invalid');
 		});
-		// setTimeout(() => {
-		// 	//
-		// }, 2000);
-		// ********
-		this.storageAccess.set('login', JSON.stringify(loginData)).then(
+		
+	};
+
+	saveLogin(logDetails: LoginDetails) {
+		// Securely store login details
+		this.storageAccess.set(this.storageAccess.LOGIN_KEY, JSON.stringify(LoginDetails)).then(
 			() => console.log('saved login'),
 			() => console.log('failed to save login')
 		)
-	};
+	}
 
 	signup(username: string, password: string) {
 
@@ -117,5 +117,10 @@ export class UserData {
 }
 
 export class LoginDetails {
-	
+	constructor(username: string, password: string) {
+		this.password = password;
+		this.username = username;
+	}
+	username?: string 
+	password?: string
 }
