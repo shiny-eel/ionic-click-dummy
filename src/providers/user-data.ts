@@ -31,6 +31,7 @@ export class UserData {
 		public storageAccess: StorageAccess
 	) {
 		auth.logout;
+		console.log('Hello UserData');
 	}
 
 
