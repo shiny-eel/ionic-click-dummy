@@ -7,6 +7,8 @@ import { NavController, ViewController } from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
 import { UserData } from '../../providers/user-data';
+import { StorageAccess } from '../../providers/storage-access';
+
 import { AccountPage } from '../account/account';
 
 
@@ -21,12 +23,24 @@ export class LoginPage {
 
 	constructor(public navCtrl: NavController, public userData: UserData,
 		public viewCtrl: ViewController,
-		public events: Events) {
+		public events: Events,
+		public storageAccess: StorageAccess) {
+
 		this.events.subscribe('user:invalid', (event) => {
 			console.log('InvalidLogin, keep logon page open');
 			//this.goToLogin();
 			this.invalidLogin = true;
-		})
+		});
+		let myself = this;
+		this.storageAccess.get('login').then(
+			data => {
+				console.log('found data from storage for login', data);
+				myself.login.username = data.username
+				myself.login.password = data.password
+				
+			},
+			reject => console.log(reject)
+		)
 	}
 
 	onLogin(form: NgForm) {
