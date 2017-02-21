@@ -13,7 +13,7 @@ import { Platform } from 'ionic-angular';
 })
 export class HomePage {
 	public people: any;
-	secret: string = 'lol';
+	secretWord: string = 'lol';
 	constructor(public navCtrl: NavController,
 		public peopleService: PeopleService,
 		public storageAccess: StorageAccess,
@@ -35,7 +35,7 @@ export class HomePage {
 							// Unchecked cast from any to string
 							// Also, this does not show the correct thing in
 							// ionic serve, but it works on Android.
-							.then(data => myself.secret = data,
+							.then(data => myself.secretWord = data,
 							error => console.log(error));
 				},
 					() => console.log('not ready'))

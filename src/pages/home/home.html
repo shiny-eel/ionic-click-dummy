@@ -12,7 +12,7 @@
   <p>
 	<button ion-button (click)="goToProcess()">Confirm </button>
 	</p>
-  <ion-input placeholder="nothing here"  [(ngModel)]="secret"></ion-input>
+  <ion-input placeholder="nothing here"  [(ngModel)]="secretWord"></ion-input>
   	<button ion-button (click)="this.storageAccess.set('secret', 'changed secure storage from button')">Confirm </button>
 
   <!--<ion-list>
