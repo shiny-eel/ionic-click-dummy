@@ -12,8 +12,8 @@
   <p>
 	<button ion-button (click)="goToProcess()">Confirm </button>
 	</p>
-  <ion-input placeholder="secret"  [(ngModel)]="secret"></ion-input>
-  	<button ion-button (click)="this.storageAccess.set('secret', this.secret)">Confirm </button>
+  <ion-input placeholder="nothing here"  [(ngModel)]="secret"></ion-input>
+  	<button ion-button (click)="this.storageAccess.set('secret', 'changed secure storage from button')">Confirm </button>
 
   <!--<ion-list>
     <ion-item *ngFor="let person of people">

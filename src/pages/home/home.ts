@@ -3,6 +3,8 @@ import { DetailsPage } from '../details/details';
 import { NavController } from 'ionic-angular';
 import { PeopleService } from '../../providers/people-service';
 import { StorageAccess } from '../../providers/storage-access';
+import { SecureStorage } from 'ionic-native';
+import { Platform } from 'ionic-angular';
 
 @Component({
 	selector: 'page-home',
@@ -14,19 +16,34 @@ export class HomePage {
 	secret: string = 'lol';
 	constructor(public navCtrl: NavController,
 		public peopleService: PeopleService,
-		public storageAccess: StorageAccess) {
+		public storageAccess: StorageAccess,
+		public plt: Platform) {
 		this.loadPeople();
 		this.navCtrl.viewDidEnter.subscribe((view) => {
 			console.log("Hello yes look at the new page", view.instance.constructor.name);
 		});
-		if (storageAccess) {
-			// storageAccess.set('secret', this.secret);
-		}
+
+		// Chained promises to ensure storage access works
+		let myself = this;
+		var myVar = setInterval(function () {
+			storageAccess.storageReady()
+				.then(() => {
+					clearInterval(myVar)
+					console.log('storage ready')
+					storageAccess.set('secret', 'set from Home')
+						.then(() => storageAccess.get('secret'))
+							// Unchecked cast from any to string
+							// Also, this does not show the correct thing in
+							// ionic serve, but it works on Android.
+							.then(data => myself.secret = data,
+							error => console.log(error));
+				},
+					() => console.log('not ready'))
+		}, 500);
 	}
 
 	goToProcess() {
 		console.log('Button Clicked');
-
 		this.navCtrl.push(DetailsPage);
 	}
 
