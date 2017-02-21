@@ -27,7 +27,7 @@ export class StorageAccess {
 	constructor(public http: Http,
 		public plt: Platform) {
 
-		console.log('Initialising Secure Storage')
+		console.log('StorageAccess: Initialising Secure Storage')
 		plt.ready().then(
 			(readySource) => {
 				this.secureStore = new SecureStorage();
@@ -63,21 +63,11 @@ export class StorageAccess {
 
 	get(item: string) {
 		if (this.secureStore) {
-			console.log('getting real store item');
+			console.log('Getting ', item, ' from real store.');
 			return this.secureStore.get(item);
-			// this.secureStore.get(item)
-			// 	.then(
-			// 	data => {
-			// 		console.log('Found this in store: ', data);
-			// 		return data;
-			// 	},
-			// 	error => {
-			// 		// Do not return anything
-			// 		console.log('Error in finding item.\n', error)
-			// 	}
-			// 	);
+
 		} else {
-			console.log('Stub since fake store');
+			console.log('Fake Secure Store: getting ', item);
 			return new Promise(function(resolve, reject){
 				resolve({data: 'Stub'});
 			});
@@ -86,16 +76,12 @@ export class StorageAccess {
 
 	set(item: string, value: any) {
 		if (this.secureStore) {
-			console.log('setting real store item');
+			console.log('Setting ', item, ' in real store.');
 
 			return this.secureStore.set(item, value);
-			// this.secureStore.set(item, value)
-			// 	.then(
-			// 	data => console.log(data),
-			// 	error => console.log(error)
-			// 	);
+	
 		} else { 
-			console.log('Stub since fake store');
+			console.log('Fake Secure Store: setting ', item);
 			return new Promise(function(resolve, reject){
 				resolve();
 			});
@@ -104,14 +90,10 @@ export class StorageAccess {
 
 	remove(item: string) {
 		if (this.secureStore) {
+			console.log('Removing ', item, ' from real store.');
 			this.secureStore.remove(item);
 
-			// this.secureStore.remove('myitem')
-			// 	.then(
-			// 	data => console.log(data),
-			// 	error => console.log(error)
-			// 	);
-		} else { console.log('Stub since fake store');
+			console.log('Fake Secure Store: removing ', item);
 		return new Promise(function(resolve, reject){
 				resolve();
 			}); }
