@@ -35,7 +35,9 @@ export class HomePage {
 							// Unchecked cast from any to string
 							// Also, this does not show the correct thing in
 							// ionic serve, but it works on Android.
-							.then(data => myself.secretWord = data,
+							.then(data => {
+								console.log('got from storage', data)
+							},
 							error => console.log(error));
 				},
 					() => console.log('not ready'))
