@@ -4,6 +4,7 @@ import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Auth, User, AuthLoginOptions, UserDetails } from '@ionic/cloud-angular';
 import { SecureStorage } from 'ionic-native';
+import { StorageAccess } from './storage-access';
 
 /**
  * Code from https://github.com/driftyco/ionic-conference-app
@@ -26,7 +27,8 @@ export class UserData {
 	constructor(
 		public events: Events,
 		public storage: Storage,
-		public auth: Auth, public user: User
+		public auth: Auth, public user: User,
+		public storageAccess: StorageAccess
 	) {
 		auth.logout;
 	}
@@ -35,7 +37,7 @@ export class UserData {
 	login(username: string, password: string) {
 
 		// ******* Add Ionic  Auth 
-		let loginData = { 'id': username, 'passphrase': password };
+		let loginData = { 'username': username, 'password': password };
 		let details: UserDetails = { 'email': username, 'password': password };
 		var self = this;
 
@@ -55,6 +57,10 @@ export class UserData {
 		// 	//
 		// }, 2000);
 		// ********
+		this.storageAccess.set('login', JSON.stringify(loginData)).then(
+			() => console.log('saved login'),
+			() => console.log('failed to save login')
+		)
 	};
 
 	signup(username: string, password: string) {
@@ -107,4 +113,8 @@ export class UserData {
 			return value;
 		})
 	};
+}
+
+export class LoginDetails {
+	
 }
