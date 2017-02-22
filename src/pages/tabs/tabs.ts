@@ -4,7 +4,6 @@ import { AccountPage } from '../account/account';
 import { HomePage } from '../home/home';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
-import { LoginPage } from '../login/login';
 import { Events } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { Tabs } from 'ionic-angular';

@@ -3,7 +3,6 @@ import { DetailsPage } from '../details/details';
 import { NavController } from 'ionic-angular';
 import { PeopleService } from '../../providers/people-service';
 import { StorageAccess } from '../../providers/storage-access';
-import { SecureStorage } from 'ionic-native';
 import { Platform } from 'ionic-angular';
 
 @Component({
