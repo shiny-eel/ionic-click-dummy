@@ -20,8 +20,8 @@ import { StorageAccess } from './storage-access';
 
 @Injectable()
 export class UserData {
-	HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
-	LOGIN_OPTIONS: AuthLoginOptions =
+
+	LOGIN_OPTIONS: AuthLoginOptions = // Needed for Ionic Auth
 	{ 'inAppBrowserOptions': { 'hidden': true }, 'remember': false };
 
 	constructor(
@@ -67,8 +67,6 @@ export class UserData {
 	}
 
 	signup(username: string, password: string) {
-
-		// Yet to implement signup? TODO
 		let details: UserDetails = { 'email': username, 'password': password };
 
 		this.auth.signup(details).then(() => {
@@ -79,10 +77,8 @@ export class UserData {
 	};
 
 	logout() {
-		// Ionic Custom Auth
+		// Ionic Auth
 		this.auth.logout()
-
-		this.storage.remove('username');
 		this.events.publish('user:logout');
 	};
 
@@ -101,23 +97,16 @@ export class UserData {
 
 	// return a promise
 	hasLoggedIn() {
-		// return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
-		// 	console.log('storage shows logged in as:', value);
-		// 	return false;
-		// //	return value === true;
-		// });
 		console.log('auth shows logged in as:', this.auth.isAuthenticated());
-
+		// uses Ionic Auth
 		return this.auth.isAuthenticated();
 	};
 
-	checkHasSeenTutorial() {
-		return this.storage.get(this.HAS_SEEN_TUTORIAL).then((value) => {
-			return value;
-		})
-	};
 }
 
+/**
+ * Class as a template for username/password pair.
+ */
 export class LoginDetails {
 	constructor(username: string, password: string) {
 		this.password = password;

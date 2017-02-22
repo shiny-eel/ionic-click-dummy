@@ -13,7 +13,7 @@ import { Platform } from 'ionic-angular';
 
 /**
  * StorageAccess holds the responsibility for implementing the Ionic Native 'SecureStorage' plugin,
- * to keep the application's login details.
+ * to keep the application's login details. (And possibly other things that need to be secure)
  * 
  * NB: For Android devices, a screen lock must be enabled for this to work - See:
  * https://github.com/Crypho/cordova-plugin-secure-storage
@@ -37,7 +37,7 @@ export class StorageAccess {
 						console.log('Storage is ready!')
 						this.isReady = true;
 					},
-					error => {
+					error => { // Handle error in creating store
 						console.log('Secure Storage Error:\n', error)
 						this.secureStore = null;
 						// Shouldn't be in final code:
