@@ -43,13 +43,14 @@ export class UserData {
 		var self = this;
 
 		// this.auth.login('custom', loginData, loginOptions).then(function (result) {
-		this.auth.login('basic', details, this.LOGIN_OPTIONS).then(function (result) {
+		this.auth.login('basic', details, this.LOGIN_OPTIONS).then( (result) => {
 			// Handle Success
 			console.log('Successful Log In');
-			self.setUsername(username);
+			//self.setUsername(username);
 			self.events.publish('user:login');
-			return;
-		}).catch(function (err) {
+			console.log('login event published');
+		},
+		(err) => {
 			// Handle error
 			console.log('Failed to log in \n', err)
 			self.events.publish('user:invalid');
