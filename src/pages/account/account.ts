@@ -17,7 +17,8 @@ export class AccountPage {
 
 	constructor(public alertCtrl: AlertController, public nav: NavController,
 		public userData: UserData, public modalCtrl: ModalController,
-		public events: Events) {
+		public events: Events
+		) {
 		this.username = 'default';
 		//this.logonModal = this.modalCtrl.create(LoginPage, { parentPage: this }, { enableBackdropDismiss: false });
 		if (userData.hasLoggedIn()) {
@@ -30,19 +31,20 @@ export class AccountPage {
 		//  Tabs must subscribe with the UserData provider to know if login has occurred.
 
 		this.events.subscribe('user:login', (event) => {
+			console.log('Account: heard login event');
 			console.log('Removing login screen');
-		//	this.nav.pop();
-			this.logonModal.dismiss();
+			this.logonModal.dismiss().then(any => {
+				console.log('successful dismiss')
+			},
+			err => console.log('failed to dismiss\n', err))
+		
 		});
 
 		this.events.subscribe('user:logout', (event) => {
 			console.log('Logged Off');
 			this.goToLogin();
 		})
-		// this.events.subscribe('user:invalid', (event) => {
-		// 	console.log('InvalidLogin, keep logon page open');
-		// 	//this.goToLogin();
-		// })
+	
 	}
 
 	ngAfterViewInit() {
@@ -50,11 +52,10 @@ export class AccountPage {
 	}
 
 	goToLogin() {
-		console.log('Need to log in');
-		// if (!this.logonModal) {
-		// console.log('Modal being created');
-		this.logonModal = this.modalCtrl.create(LoginPage, { parentPage: this }, { enableBackdropDismiss: false })
-		// }
+		console.log('Creating and Presenting Modal');
+
+		this.logonModal = this.modalCtrl
+			.create(LoginPage, { parentPage: this }, { enableBackdropDismiss: false });
 		this.logonModal.present();
 		console.log('Modal created');
 	}

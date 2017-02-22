@@ -18,13 +18,13 @@ export class LoginPage {
 	submitted = false;
 	invalidLogin = false;
 	askToSaveLogin = true;
-
+	dead = false;
 	constructor(public navCtrl: NavController, public userData: UserData,
 		public viewCtrl: ViewController,
 		public events: Events,
 		public storageAccess: StorageAccess,
 		private alertCtrl: AlertController) {
-
+		var myself = this;
 		this.events.subscribe('user:invalid', (event) => {
 			console.log('InvalidLogin, keep logon page open');
 			this.invalidLogin = true;
@@ -32,27 +32,33 @@ export class LoginPage {
 		});
 
 		this.events.subscribe('user:login', (event) => {
-			console.log('User Login, ask to save login');
-			this.presentConfirm();
+			if (!myself.dead) {
+				myself.dead = true;
+				console.log('Login: heard login event');
+				//	this.events.unsubscribe('user:login', this);
+				if (myself.askToSaveLogin) {
+					console.log('User Login, ask to save login');
+					myself.presentConfirm();
+				}
+			}
 		});
 
-		let myself = this;
+		// Try load user login
 		this.storageAccess.get(this.storageAccess.LOGIN_KEY).then(
 			data => {
 				console.log('found data from storage for login\n', data);
 				// Need to add type safety here TODO
 				let parsedObj = JSON.parse(data)
 				// if (parsedObj.) {
-					myself.login = parsedObj
-					console.log('Saved obj is a logindetail obj.',myself.login);
+				myself.login = parsedObj
+				console.log('login object is now:\n', myself.login);
 				// } else { console.log('Saved obj was not a logindetail')}
-				myself.askToSaveLogin = false;
+				myself.askToSaveLogin = false; // Don't ask to save login again
 
 			},
 			reject => {
 				console.log('Did not find login in storage\n', reject)
-				myself.askToSaveLogin = true;
-
+				myself.askToSaveLogin = true; // No memory of login - ask to save
 			}
 		)
 	}
@@ -60,8 +66,8 @@ export class LoginPage {
 	onLogin(form: NgForm) {
 		this.submitted = true;
 		if (form.valid) {
+			console.log('Calling userdata to login');
 			this.userData.login(this.login.username, this.login.password);
-			//   this.navCtrl.push(AccountPage);
 		}
 	}
 
@@ -73,28 +79,30 @@ export class LoginPage {
 	presentConfirm() {
 		if (!this.showingAlert) {
 			this.showingAlert = true;
-		let alert = this.alertCtrl.create({
-			title: 'Remember You',
-			message: 'Do you want us to remember your login deets?',
-			buttons: [
-				{
-					text: 'No Thanks',
-					role: 'cancel',
-					handler: () => {
-						console.log('Cancel clicked');
+			let alert = this.alertCtrl.create({
+				title: 'Remember You',
+				message: 'Do you want us to remember your login deets?',
+				buttons: [
+					{
+						text: 'No Thanks',
+						role: 'cancel',
+						handler: () => {
+							console.log('Cancel clicked');
+							this.askToSaveLogin = false;
+						}
+					},
+					{
+						text: 'Remember Me!',
+						handler: () => {
+							console.log('Remember clicked');
+							this.userData.saveLogin(this.login);
+							this.askToSaveLogin = false;
+							this.showingAlert = false;
+						}
 					}
-				},
-				{
-					text: 'Remember Me!',
-					handler: () => {
-						console.log('Remember clicked');
-						this.userData.saveLogin(this.login);
-						this.showingAlert = false;
-					}
-				}
-			]
-		});
-		alert.present();
-	}
+				]
+			});
+			alert.present();
+		}
 	}
 }
