@@ -8,6 +8,10 @@ import 'rxjs/add/operator/map';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
+
+/**
+ * PeopleService is simply a class created to test 'http.get'. It should not be in the real app.
+ */
 @Injectable()
 export class PeopleService {
   data1: any;

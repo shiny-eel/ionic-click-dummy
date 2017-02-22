@@ -5,14 +5,9 @@ import { Events } from 'ionic-angular';
 import { NavController, ViewController, AlertController } from 'ionic-angular';
 
 import { SignupPage } from '../signup/signup';
-import { TabsPage } from '../tabs/tabs';
 import { UserData } from '../../providers/user-data';
 import { LoginDetails } from '../../providers/user-data';
-
 import { StorageAccess } from '../../providers/storage-access';
-
-import { AccountPage } from '../account/account';
-
 
 @Component({
 	selector: 'page-user',
@@ -46,14 +41,17 @@ export class LoginPage {
 			data => {
 				console.log('found data from storage for login\n', data);
 				// Need to add type safety here TODO
-				myself.login = JSON.parse(data);
-				console.log(myself.login);
-				myself.askToSaveLogin = true;
+				let parsedObj = JSON.parse(data)
+				// if (parsedObj.) {
+					myself.login = parsedObj
+					console.log('Saved obj is a logindetail obj.',myself.login);
+				// } else { console.log('Saved obj was not a logindetail')}
+				myself.askToSaveLogin = false;
 
 			},
 			reject => {
 				console.log('Did not find login in storage\n', reject)
-				myself.askToSaveLogin = false;
+				myself.askToSaveLogin = true;
 
 			}
 		)
@@ -71,7 +69,10 @@ export class LoginPage {
 		this.navCtrl.push(SignupPage);
 	}
 
+	showingAlert = false;
 	presentConfirm() {
+		if (!this.showingAlert) {
+			this.showingAlert = true;
 		let alert = this.alertCtrl.create({
 			title: 'Remember You',
 			message: 'Do you want us to remember your login deets?',
@@ -86,12 +87,14 @@ export class LoginPage {
 				{
 					text: 'Remember Me!',
 					handler: () => {
-						console.log('Buy clicked');
+						console.log('Remember clicked');
 						this.userData.saveLogin(this.login);
+						this.showingAlert = false;
 					}
 				}
 			]
 		});
 		alert.present();
+	}
 	}
 }

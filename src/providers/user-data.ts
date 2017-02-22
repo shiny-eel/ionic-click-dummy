@@ -11,9 +11,10 @@ import { StorageAccess } from './storage-access';
  */
 
 /**
- * Responsibility for implementation of login and signup is within this provider.
+ * Responsibility for implementation of login and signup - communicating with the server.
+ * Currently this is done through Ionic's cloud Auth. Will need to be converted to use ECANS own auth backend.
  * 
- * No individual pages should implement this. However, individual pages will need to
+ * No individual pages should implement this same function. However, individual pages will need to
  * implement the front-end for login/signup - i.e. reporting to the user if a logon attempt was invalid.
  */
 
@@ -37,8 +38,8 @@ export class UserData {
 	login(username: string, password: string) {
 
 		// ******* Add Ionic  Auth 
-		let loginData = new LoginDetails(username, password);
-		let details: UserDetails = { 'email': username, 'password': password };
+		let loginData = new LoginDetails(username, password); // Own class for login details
+		let details: UserDetails = { 'email': username, 'password': password }; // Ionic Auth class for login details
 		var self = this;
 
 		// this.auth.login('custom', loginData, loginOptions).then(function (result) {
@@ -58,9 +59,9 @@ export class UserData {
 
 	saveLogin(logDetails: LoginDetails) {
 		// Securely store login details
-		this.storageAccess.set(this.storageAccess.LOGIN_KEY, JSON.stringify(LoginDetails)).then(
+		this.storageAccess.set(this.storageAccess.LOGIN_KEY, JSON.stringify(logDetails)).then(
 			() => console.log('saved login'),
-			() => console.log('failed to save login')
+			(err) => console.log('failed to save login\n', err)
 		)
 	}
 
