@@ -12,7 +12,7 @@
 		<img src="assets/icon/favicon.ico" alt="Ionic logo">
 	</div>
 	<p ion-text [hidden]="!invalidLogin" color="danger" padding-left>
-				Invalid email/password.
+		Invalid email/password.
 	</p>
 
 	<form #loginForm="ngForm" novalidate>
@@ -20,9 +20,9 @@
 			<ion-item>
 				<!-- Prompt user input USERNAME -->
 				<ion-label stacked color="primary">Username</ion-label>
-				<ion-input [(ngModel)]="login.username" name="username" clearInput="true" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
-					required>
-				</ion-input>
+				<ion-input [(ngModel)]="login.username" name="username" clearInput="true" type="text" #username="ngModel" spellcheck="false"
+					autocapitalize="off" placeholder="lando.cal@bespin.com" required>
+					</ion-input>
 			</ion-item>
 			<p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
 				Username is required
@@ -31,8 +31,9 @@
 			<ion-item>
 				<!-- Prompt user input PASSWORD -->
 				<ion-label stacked color="primary">Password</ion-label>
-				<ion-input [(ngModel)]="login.password" name="password" clearInput="true" type="password" #password="ngModel" required>
-				</ion-input>
+				<ion-input [(ngModel)]="login.password" name="password" clearInput="true" type="password" #password="ngModel" placeholder="xxxxxx"
+					required>
+					</ion-input>
 			</ion-item>
 			<p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
 				Password is required

@@ -70,7 +70,7 @@ export class StorageAccess {
 		} else {
 			console.log('Fake Secure Store: getting ', item);
 			return new Promise(function(resolve, reject){
-				resolve({data: 'Stub'});
+				resolve(JSON.stringify({data: 'Stub'}));
 			});
 		}
 	}

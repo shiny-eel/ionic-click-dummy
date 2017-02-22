@@ -5,20 +5,18 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
 	<ion-navbar>
 		<ion-title>Petrol Details</ion-title>
 	</ion-navbar>
-
 </ion-header>
 
 <ion-content padding>
 
 	<ion-list>
-
+		<!--
 		<ion-list-header>
 			Payment Details
-		</ion-list-header>
+		</ion-list-header>-->
 
 		<ion-item>
 			<ion-icon item-left name="pin"></ion-icon>
@@ -53,16 +51,23 @@
 
 	</ion-list>
 
-	<ion-list>
-		<ion-list-header>
+	<!--<ion-list-header>
 			Confirm Payment
-		</ion-list-header>
-			<h2>Are you sure you want to pay ${{ sliderValue }} at {{ pumpNumber }}?</h2>
-		<p> Using card no: 1234-XXXX-XXXX-XXXX </p>
-		<button ion-button item-left (click)="goToChangeCard()">Change Card </button>
-		<button ion-button item-right (click)="presentLoadingText()">Confirm </button>
+		</ion-list-header>-->
+	<div class="bar bar-header">
 
-	</ion-list>
+		<h2 text-center>Are you sure you want to pay ${{ sliderValue }} at {{ pumpNumber }}?</h2>
+		<p text-center> Using card no: 1234-XXXX-XXXX-XXXX </p>
+	</div>
+	<ion-row responsive-sm>
+		<ion-col>
+			<button ion-button (click)="presentLoadingText()" type="submit" block>Confirm</button>
+		</ion-col>
+		<ion-col>
+			<button ion-button (click)="goToChangeCard()" color="light" block>Change Card</button>
+		</ion-col>
+	</ion-row>
+
 
 
 	<!--<p>

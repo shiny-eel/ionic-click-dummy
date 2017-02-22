@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, LoadingController, Modal } from 'ionic-angular';
 import { ChangeCardPage } from '../change-card/change-card';
 import { ReceivePayPage } from '../receive-pay/receive-pay';
 
@@ -16,13 +16,14 @@ import { ReceivePayPage } from '../receive-pay/receive-pay';
 export class DetailsPage {
 	sliderValue: string;
 	pumpNumber: string;
-	
+	modal: Modal;
   constructor(public navCtrl: NavController, 
   public navParams: NavParams, 
   public modalCtrl: ModalController,
   public loadingCtrl: LoadingController) {
 	  this.sliderValue = "40";
 	  this.pumpNumber = "Pump 1";
+	  this.modal = this.modalCtrl.create(ChangeCardPage, { parentPage: this })
   }
 
   ionViewDidLoad() {
@@ -30,9 +31,8 @@ export class DetailsPage {
   }
 
   goToChangeCard() {
-    console.log('Button Clicked');
-	  let modal = this.modalCtrl.create(ChangeCardPage, { parentPage: this })
-	  modal.present();
+    console.log('Changing Card');
+	  this.modal.present();
  //   this.navCtrl.pop();
   }
   
