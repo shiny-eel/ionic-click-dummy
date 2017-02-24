@@ -1,4 +1,4 @@
-# ionic-click-dummy
+# ionic-click-dummy --- DEAD REPO // MOVED TO BITBUCKET
 
 In order for this project to work (using 'ionic serve' etc), then you need more than just these files.
 
