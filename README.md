@@ -1,14 +1,11 @@
 # ionic-click-dummy
 
-In order for this project to work (using 'ionic serve' etc), then you need more than just these files.
+Adventure into using Ionic 2 to create a Progressive Web App for iOS, Android, and Web.
+Technologies:
+- Apache Cordova
+- Angular
+- Typescript
+- Ionic
+  - Ionic Cloud for Push notifications
+- Sass
 
-From the basic ionic template (ionic start --v2 myApp tabs), copy over the following files:
-- hooks
-- node_modules
-- plugins
-- resources
-- www
-- src/service-worker.js
-
-Additionally, Ionic Cloud must be set up.
-https://docs.ionic.io/setup.html
